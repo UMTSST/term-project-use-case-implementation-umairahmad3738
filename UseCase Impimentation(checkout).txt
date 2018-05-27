@@ -1,0 +1,97 @@
+// ConsoleApplication1.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include <string.h>
+#include <string>
+#include <fstream>
+using namespace std; 
+
+struct guest
+{
+	string gname;
+	int age;
+	int nic;
+	double guest_account_no = 100;
+	
+
+};
+
+struct host
+{
+	string hname="Al Kahaf Hostel";
+	int house_no=15;
+	int room_no = 2;
+	bool availbility = 0;
+	double host_account_no = 0;
+	double rating=0;
+	double rent = 0;
+	double extraCharges = 0;
+	double days;
+	double ratePerDay=15;
+
+};
+
+ void checkout()
+{
+	guest g;
+	host h;
+	cout << "Enter the guest name: ";
+	getline(cin, g.gname);
+	
+	cout << "Enter the Guest age: ";
+	cin >> g.age;
+	
+	cout << "Enter guest CNIC: ";
+	cin >> g.nic;
+	cout << "Enter number of days stayed: ";
+	cin >> h.days;
+	
+	cout << "Enter the Amount of Other Charges in dollar: ";
+	cin >> h.extraCharges;
+
+	{
+		if (h.rent + h.extraCharges < g.guest_account_no)
+		{
+			g.guest_account_no = g.guest_account_no - (h.rent + h.extraCharges);
+			h.host_account_no = h.host_account_no + h.rent + h.extraCharges;
+		}
+		else
+		{
+			cout << "Your Account has insufficent balance." << endl;
+		}
+	}
+	
+
+
+	cout << "=====================================" << endl;
+	cout << "          Check Out                  " << endl;
+	cout << "=====================================" << endl;
+	cout << "Guest name: "<<g.gname << endl;
+	cout << "Guest Age: " << g.age << endl;
+	cout << "Guest CNIC: " << g.nic << endl;
+	cout << "Host Name: " << h.hname << endl;
+	cout << "Host house number: " << h.house_no << endl;
+	cout << "Host house room number: " << h.room_no << endl;
+	h.rent = h.ratePerDay*h.days;
+	cout << "Rent Charged : " << h.rent << endl;
+	cout << "Extra Charged : " << h.extraCharges << endl;
+	cout << "Total Ammount Charged : " << h.rent+h.extraCharges << endl;
+	h.availbility = 1;
+	cout << endl << endl;
+	cout << "Rate us Enter between 1-5: ";
+	cin >> h.rating;
+	cout << "Thank you for your feedback :-) "<<endl;
+
+
+
+}
+
+int main()
+{
+	checkout();
+
+    return 0;
+}
+
